@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  overflow-y: scroll;
+  text-decoration: none;
+}
+a {
+  text-decoration: none;
+  background-color: none;
+}
+
+.active {
+  color: brown;
+  background-color: rgba(127, 24, 200, 0.053);
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(171, 171, 204);
+  border-radius: 1rem;
+}
