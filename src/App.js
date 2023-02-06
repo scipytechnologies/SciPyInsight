@@ -119,7 +119,6 @@ function App() {
                 <Route path="profile" element={<ProtectedRoute user={active}> <StudentProfile /></ProtectedRoute>} />
                 <Route path="advancedClass" element={<ProtectedRoute user={active}> <AdvancedClass /></ProtectedRoute>} />
                 <Route path="courseRegister" element={<ProtectedRoute user={active}> <CourseRegister /></ProtectedRoute>} />
-
               </Route>
 
 
