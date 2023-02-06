@@ -1,16 +1,50 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar'
 import Container from '@mui/material/Container'
 import { Breadcrumbs, Stack } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
+import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { courseReg } from '../../store/loginedUserSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+  const navigate = useNavigate()
+  const id = useSelector((state) => state.loginedUser.id)
+  const dispatch = useDispatch()
+  
+   const checkCourseReg =() => {
+    
+    
+    axios.get(`http://localhost:5000/user/getuser/${id}`)
+    .then(function (response) {
+      // handle success
+      console.log(response.data.courseReg);
+      dispatch(courseReg(response.data.courseReg))
+      if(response.data.courseReg == false){
+        navigate("/student/courseRegister");
+     }
+     
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+  }
+
+
+  useEffect(() => {
+    checkCourseReg();
+  }, []);
+
 
 
   const breadcrumbs = [
     { label: 'Home', to: '/student/home' }
   ];
+
+
   return (
     <>
       <Container>

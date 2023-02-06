@@ -23,6 +23,10 @@ const UserSchema = new Schema(
     role :{
       type: String,
       required: true,
+    },
+    courseReg :{
+      type: Boolean,
+      required : true,
     }
 
   },

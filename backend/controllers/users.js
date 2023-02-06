@@ -31,7 +31,8 @@ module.exports = {
               lastName,
               email,
               password: hashedpassword,
-              role:"student"
+              role:"student",
+              courseReg : false
             });
             res.status(201).json({ message: "user added with success"});
           }
@@ -64,7 +65,7 @@ module.exports = {
           } else {
             // generating a token and storing it in a cookie
             const token = jwt.sign({ _id: user._id , role: user.role}, "sooraj_DOING_GOOD", {
-              expiresIn: "12h",
+              expiresIn: "8h",
             });
             const options = {
               expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
@@ -81,7 +82,7 @@ module.exports = {
             res.status(201).json({
               token,
               role : user.role
-            });
+            });000
           }
         });
       }
@@ -104,6 +105,24 @@ module.exports = {
     }
 
   },
+
+   getUser : async(req,res) => {
+    const id = req.params.id;
+    console.log(id,"id vanno");
+    try {
+      const userdata = await User.findById(id);
+       const data = {
+        firstName : userdata.firstName,
+        LastName : userdata.lastNameName,
+        email : userdata.email,
+        courseReg : userdata.courseReg
+       }
+      res.status(200).json(data)
+
+    }catch (error) {
+
+    }
+   },
 
 
   //  ---------------------------------------- //Google Authentication //--------------------------- //
