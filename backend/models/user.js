@@ -25,7 +25,7 @@ const UserSchema = new Schema(
       required: true,
     },
     courseReg :{
-      type: Boolean,
+      type: String,
       required : true,
     }
 
