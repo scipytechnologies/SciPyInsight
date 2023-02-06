@@ -43,9 +43,6 @@ function CourseRegister() {
     };
 
 
-
-
-
     return (
         <>
             {/* Breadcrumbs */}
@@ -92,26 +89,54 @@ function CourseRegister() {
                                                 onChange={onChangeHandler}
                                             />
                                         </Grid>
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} sm={6}>
                                             <TextField
                                                 required
                                                 fullWidth
-                                                id="email"
-                                                label="Email Address"
-                                                name="email"
-                                                autoComplete="email"
+                                                id="department"
+                                                label="department"
+                                                name="department"
                                                 onChange={onChangeHandler}
                                             />
                                         </Grid>
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} sm={6}>
+                                        <FormControl fullWidth>
+                                                <InputLabel id="demo-simple-select-label">Select Course</InputLabel>
+                                                <Select
+                                                    labelId="demo-simple-select-label"
+                                                    id="demo-simple-select"
+                                                    value={course}
+                                                    label="Select Course"
+                                                    onChange={handleChange}
+
+                                                >
+                                                    <MenuItem value={1}>Artificial Intellgence</MenuItem>
+                                                    <MenuItem value={2}>MERN Stack</MenuItem>
+                                                    <MenuItem value={3}>Python Machine Learning</MenuItem>
+                                                </Select>
+                                            </FormControl>
+                                           
+                                        </Grid>
+
+                                        <Grid item xs={12} sm={6}>
+                                        <TextField
+                                                required
+                                                fullWidth
+                                                name="place"
+                                                label="Place"
+                                                type="text"
+                                                id="place"
+                                                onChange={onChangeHandler}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
                                             <TextField
                                                 required
                                                 fullWidth
-                                                name="password"
-                                                label="Password"
-                                                type="password"
-                                                id="password"
-                                                autoComplete="new-password"
+                                                name="College"
+                                                label="College"
+                                                type="text"
+                                                id="College"
                                                 onChange={onChangeHandler}
                                             />
                                         </Grid>
@@ -134,7 +159,7 @@ function CourseRegister() {
                                 :
                                 <div style={{ height: '70vh', width: '95vw', backgroundColor: '#ffff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                                     <lottie-player src="https://lottie.host/344fdb29-6755-436a-b0e2-8b874f61cdec/h7cqKXroFY.json" background="rgba(0, 0, 0, 0)" speed="1" loop autoplay style={{ width: '80%', height: '80%' }}></lottie-player>
-                                    
+
 
                                     <Box sx={{ mt: -2 }} sx={{ textAlign: 'center' }}>
                                         <Typography variant="h3" color="secondary">Your Classroom is under construction</Typography>

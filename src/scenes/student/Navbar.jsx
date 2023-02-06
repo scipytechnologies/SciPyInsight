@@ -17,14 +17,14 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { setLiveClass, setPreviousClass, unSetLiveClass, unSetPreviousClass } from '../../store/studentClass';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Logo from '../../assets/Logo.png'
 import { isNotConnected } from '../../store/loginedUserSlice';
 import { ToastContainer, toast } from "react-toastify";
+import { courseReg } from '../../store/loginedUserSlice';
 
 
 const drawerWidth = 240;
-
 
 
 function DrawerAppBar(props) {
@@ -39,6 +39,7 @@ function DrawerAppBar(props) {
 
 
   // navigation items
+  const courseReg =  useSelector((state) => state.loginedUser.courseReg)
   const navItems = [
     {
       title: 'Home',
@@ -59,7 +60,7 @@ function DrawerAppBar(props) {
 
     {
       title: 'New Course',
-      myAction: ()=> {
+      myAction: () => {
         navigate('/student/courseRegister')
       }
     },
@@ -98,18 +99,56 @@ function DrawerAppBar(props) {
     }
   ]
 
+
+  // nav items for students whose batch were not started
+  const tempNavItems = [
+    {
+      title: 'Home',
+      myAction: () => {
+        navigate('/student/courseRegister')
+      }
+    },
+    {
+      title: 'Logout',
+      myAction: () => {
+        if (localStorage.getItem("user-token")) {
+          localStorage.clear();
+          dispatch(isNotConnected())
+          toast.success(`Logout Succesfully`, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      }
+    }
+  ]
+
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <img src={Logo} alt="logo" style={{ height: '4rem', width: '6rem' }} />
       <Divider />
       <List>
-        {navItems.map((item, val) => (
-          <ListItem key={val} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }} onClick={item.myAction}>
-              <ListItemText primary={item.title} sx={{ color: '#7f18c8' }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {
+          courseReg ?
+
+            navItems.map((item, val) => (
+              <ListItem key={val} disablePadding>
+                <ListItemButton sx={{ textAlign: 'center' }} onClick={item.myAction}>
+                  <ListItemText primary={item.title} sx={{ color: '#7f18c8' }} />
+                </ListItemButton>
+              </ListItem>
+            ))
+
+            :
+
+            tempNavItems.map((item, val) => (
+              <ListItem key={val} disablePadding>
+                <ListItemButton sx={{ textAlign: 'center' }} onClick={item.myAction}>
+                  <ListItemText primary={item.title} sx={{ color: '#7f18c8' }} />
+                </ListItemButton>
+              </ListItem>
+            ))
+        }
       </List>
     </Box>
   );
@@ -143,11 +182,21 @@ function DrawerAppBar(props) {
             <img src={Logo} alt="logo" style={{ height: '4rem', width: '6rem' }} />
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item, val) => (
-              <Button key={val} sx={{ color: '#7f18c8' }} onClick={item.myAction} size="small">
-                {item.title}
-              </Button>
-            ))}
+            {
+              courseReg ?
+
+                navItems.map((item, val) => (
+                  <Button key={val} sx={{ color: '#7f18c8' }} onClick={item.myAction} size="small">
+                    {item.title}
+                  </Button>
+                )) :
+
+                tempNavItems.map((item, val) => (
+                  <Button key={val} sx={{ color: '#7f18c8' }} onClick={item.myAction} size="small">
+                    {item.title}
+                  </Button>
+                ))
+            }
           </Box>
         </Toolbar>
       </AppBar>
