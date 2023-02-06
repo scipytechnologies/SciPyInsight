@@ -13,7 +13,7 @@ module.exports = {
 
   signup: async (req, res) => {
     const { firstName,lastName, email, password } = req.body;
-    console.log(req.body);
+    
     const { errors, isValid } = SignupValidation(req.body);
 
     try {
