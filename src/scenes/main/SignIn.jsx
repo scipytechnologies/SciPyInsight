@@ -51,11 +51,11 @@ export default function SignIn() {
       .post("http://localhost:5000/user/signin", form)
       .then((response) => {
         const token = response.data.token;
-        const role = response.data.role
+        const role = response.data.role;
         // Save token to localStorage
         localStorage.setItem("user-token", JSON.stringify(token));
-        toast.success(`${response.data.message}`, {
-          position: toast.POSITION.BOTTOM_CENTER,
+        toast.success(`Logged In Succesfully`, {
+          position: toast.POSITION.TOP_CENTER,
         });
         console.log(response);       
          window.location.reload(false);
@@ -148,19 +148,7 @@ export default function SignIn() {
             onChange={onChangeHandler}
           />
 
-          {/* <TextField
-              variant="outlined"
-              select
-              label="Role"
-              name='roles'
-              sx={{ width: '100%', margin: '1rem 0' }}
-            >
-              <MenuItem value='student'>Student</MenuItem>
-              <MenuItem value='teacher'>Teacher</MenuItem>
-              <MenuItem value='admin'>admin</MenuItem>
-            </TextField> */}
-
-
+      
           <Button
             type="submit"
             fullWidth

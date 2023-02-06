@@ -24,6 +24,9 @@ import { setLoading } from './store/loader';
 import Loader from './scenes/main/Loader';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
+import CourseRegister from './scenes/student/CourseRegister';
+import SnackBar from './scenes/main/SnackBar';
+import Error from './scenes/main/Error'
 
 import { loggeduser, isConnected, isNotConnected, loginRole } from './store/loginedUserSlice';
 
@@ -40,7 +43,7 @@ function App() {
       const user = JSON.parse(localStorage.getItem("user-token"));
       if (user) {
         const data = { token: user }
-        const verifyUser = async () => {         
+        const verifyUser = async () => {
           axios
             .post("http://localhost:5000/user/auth", data)
             .then((response) => {
@@ -83,45 +86,49 @@ function App() {
       {/* <LandingPage /> */}
       {/* <Outlet /> */}
       <BrowserRouter>
+        <SnackBar />
         {
           loading ? <Loader /> :
             <Routes>
+              <Route path='*' element={<Error />} />
               <Route path="/" element={<LandingPage />} />
               <Route path="login" element={<ForceRedirect user={active}><SignIn /></ForceRedirect>} />
               <Route path="register" element={<SignUp />} />
 
-    
-                {/* admin */}
-                <Route path="admin" element={<ProtectedRoute user={active}><Dashboard /></ProtectedRoute>}>
-                  <Route path='home' element={<ProtectedRoute user={active}><Home /></ProtectedRoute>} />
-                  <Route path='batches' element={<ProtectedRoute user={active}><Batches /></ProtectedRoute>} >
-                    <Route path=':batchId' element={<ProtectedRoute user={active}><Batches /></ProtectedRoute>} />
-                  </Route>
 
-                  <Route path='students' element={<ProtectedRoute user={active}><Students /></ProtectedRoute>} >
-                    <Route path=':studentId' element={<ProtectedRoute user={active}><Student /></ProtectedRoute>} />
-                  </Route>
-
-                  <Route path='teachers' element={<ProtectedRoute user={active}><Teachers /></ProtectedRoute>} >
-                    <Route path=':teacherId' element={<ProtectedRoute user={active}><Teacher /></ProtectedRoute>} />
-                  </Route>
-                </Route>
-                
-                {/* student */}
-                <Route path="student" element={<ProtectedRoute user={active}><StudentNav /></ProtectedRoute>}>
-                  <Route path="home" element={<ProtectedRoute user={active}> <StudentHome /> </ProtectedRoute>} />
-                  <Route path="class" element={<ProtectedRoute user={active}> <StudentClass /></ProtectedRoute>} />
-                  <Route path="profile" element={<ProtectedRoute user={active}> <StudentProfile /></ProtectedRoute>} />
-                  <Route path="advancedClass" element={<ProtectedRoute user={active}> <AdvancedClass /></ProtectedRoute>} />
+              {/* admin */}
+              <Route path="admin" element={<ProtectedRoute user={active}><Dashboard /></ProtectedRoute>}>
+                <Route path='home' element={<ProtectedRoute user={active}><Home /></ProtectedRoute>} />
+                <Route path='batches' element={<ProtectedRoute user={active}><Batches /></ProtectedRoute>} >
+                  <Route path=':batchId' element={<ProtectedRoute user={active}><Batches /></ProtectedRoute>} />
                 </Route>
 
-
-                {/* teacher */}
-                <Route path="teacher">
-                  <Route index element={<ProtectedRoute user={active}><TeacherHome /></ProtectedRoute>} />
-                  <Route path="batches" element={<ProtectedRoute user={active}><TeacherBatch /></ProtectedRoute>} />
+                <Route path='students' element={<ProtectedRoute user={active}><Students /></ProtectedRoute>} >
+                  <Route path=':studentId' element={<ProtectedRoute user={active}><Student /></ProtectedRoute>} />
                 </Route>
-              </Routes>
+
+                <Route path='teachers' element={<ProtectedRoute user={active}><Teachers /></ProtectedRoute>} >
+                  <Route path=':teacherId' element={<ProtectedRoute user={active}><Teacher /></ProtectedRoute>} />
+                </Route>
+              </Route>
+
+              {/* student */}
+              <Route path="student" element={<ProtectedRoute user={active}><StudentNav /></ProtectedRoute>}>
+                <Route path="home" element={<ProtectedRoute user={active}> <StudentHome /> </ProtectedRoute>} />
+                <Route path="class" element={<ProtectedRoute user={active}> <StudentClass /></ProtectedRoute>} />
+                <Route path="profile" element={<ProtectedRoute user={active}> <StudentProfile /></ProtectedRoute>} />
+                <Route path="advancedClass" element={<ProtectedRoute user={active}> <AdvancedClass /></ProtectedRoute>} />
+                <Route path="courseRegister" element={<ProtectedRoute user={active}> <CourseRegister /></ProtectedRoute>} />
+
+              </Route>
+
+
+              {/* teacher */}
+              <Route path="teacher">
+                <Route index element={<ProtectedRoute user={active}><TeacherHome /></ProtectedRoute>} />
+                <Route path="batches" element={<ProtectedRoute user={active}><TeacherBatch /></ProtectedRoute>} />
+              </Route>
+            </Routes>
         }
       </BrowserRouter>
     </>

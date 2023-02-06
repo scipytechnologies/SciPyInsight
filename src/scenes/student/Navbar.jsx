@@ -20,6 +20,7 @@ import { setLiveClass, setPreviousClass, unSetLiveClass, unSetPreviousClass } fr
 import { useDispatch } from 'react-redux';
 import Logo from '../../assets/Logo.png'
 import { isNotConnected } from '../../store/loginedUserSlice';
+import { ToastContainer, toast } from "react-toastify";
 
 
 const drawerWidth = 240;
@@ -55,6 +56,13 @@ function DrawerAppBar(props) {
       }
 
     },
+
+    {
+      title: 'New Course',
+      myAction: ()=> {
+        navigate('/student/courseRegister')
+      }
+    },
     {
       title: 'Class',
       myAction: () => {
@@ -65,7 +73,7 @@ function DrawerAppBar(props) {
 
     },
     {
-      title: 'L-Class',
+      title: 'Adv-Class',
       myAction: () => {
         navigate('/student/advancedClass')
       }
@@ -82,6 +90,9 @@ function DrawerAppBar(props) {
         if (localStorage.getItem("user-token")) {
           localStorage.clear();
           dispatch(isNotConnected())
+          toast.success(`Logout Succesfully`, {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       }
     }
