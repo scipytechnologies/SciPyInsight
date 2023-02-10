@@ -27,10 +27,10 @@ app.use(
 );
 //Require application Route modules
 const userRoutes = require("./routes/users");
-const orgRoutes = require("./routes/orgRoute")
+
 
 app.use("/user", userRoutes);
-app.use("/user", orgRoutes)
+// app.use("/user", orgRoutes)
 
 app.listen(PORT, function () {
   console.log(`Server Runs Perfectly at http://localhost:${PORT}`);

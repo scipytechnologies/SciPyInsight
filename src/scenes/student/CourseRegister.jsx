@@ -161,7 +161,7 @@ function CourseRegister() {
                                     <lottie-player src="https://lottie.host/344fdb29-6755-436a-b0e2-8b874f61cdec/h7cqKXroFY.json" background="rgba(0, 0, 0, 0)" speed="1" loop autoplay style={{ width: '80%', height: '80%' }}></lottie-player>
 
 
-                                    <Box sx={{ mt: -2 }} sx={{ textAlign: 'center' }}>
+                                    <Box  sx={{ mt: -2,textAlign: 'center' }}>
                                         <Typography variant="h3" color="secondary">Your Classroom is under construction</Typography>
                                         <Typography variant="h5" color="secondary">Soon, you will be able to access your classroom</Typography>
                                     </Box>

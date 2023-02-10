@@ -3,19 +3,7 @@ const Schema = mongoose.Schema;
 
 const CourseRegSchema = new Schema(
     {
-        firstName: {
-            type: String,
-            required: true,
-        },
-        lastName: {
-            type: String,
-            required: true,
-        },
-        email: {
-            type: String,
-            required: true,
-        },
-        whatsapp: {
+        userID: {
             type: String,
             required: true,
         },
@@ -39,10 +27,15 @@ const CourseRegSchema = new Schema(
             type: String,
             required: true,
         },
-        registeration :{
+        whatsappNo: {
+            type: String,
+            required: true,
+        },
+        premium: {
             type: Boolean,
             required: true,
         }
+       
 
 
     },

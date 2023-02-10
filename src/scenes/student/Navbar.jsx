@@ -183,7 +183,7 @@ function DrawerAppBar(props) {
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {
-              courseReg ?
+               courseReg =="true"?
 
                 navItems.map((item, val) => (
                   <Button key={val} sx={{ color: '#7f18c8' }} onClick={item.myAction} size="small">
