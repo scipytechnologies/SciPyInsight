@@ -35,9 +35,6 @@ const CourseRegSchema = new Schema(
             type: Boolean,
             required: true,
         }
-       
-
-
     },
     { timestamps: true }
 );
