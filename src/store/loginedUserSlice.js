@@ -5,7 +5,7 @@ const initialState = {
   id :'bla',
   isConnected : false,
   role : '',
-  courseReg :''
+  courseReg : ''
 }
 
 export const LoginedUserSlice = createSlice({

@@ -3,7 +3,8 @@ import React from 'react'
 import NavBar from '../main/Navbar'
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
-import { Button, Grid } from '@mui/material'
+import { Button, FormControl, Grid, InputAdornment, TextField } from '@mui/material'
+import { AccountCircle } from '@mui/icons-material'
 
 
 function LandingPage() {
@@ -15,7 +16,7 @@ function LandingPage() {
     }
 
     return (
-        <Box sx={{ background: 'linear-gradient(0deg, rgba(22,0,38,1) 6%, rgba(127,24,200,1) 45%, rgba(255,255,255,1) 87%)' }}>
+        <Box sx={{ background: 'linear-gradient(0deg, rgba(22,0,38,1) 6%, rgba(127,24,200,1) 45%, rgba(255,255,255,1) 87%)', height: 'auto', flexGrow: 1 }}>
             <NavBar />
             {/* hero section */}
             <Container>
@@ -31,7 +32,7 @@ function LandingPage() {
 
                                 <Box sx={{ mt: 3 }}>
                                     <Button variant="contained" color='primary' size="large" onClick={getStarted}>Get Started</Button>
-                                </Box>  
+                                </Box>
                             </Box>
                         </Grid>
 
@@ -50,7 +51,7 @@ function LandingPage() {
                                 </Box>
 
                                 <Box sx={{ mt: 3 }}>
-                                    <Button variant="outlined" color='primary' size="large"  onClick={getStarted}>Get Started</Button>
+                                    <Button variant="outlined" color='primary' size="large" onClick={getStarted}>Get Started</Button>
                                 </Box>
                             </Box>
                         </Grid>
@@ -80,7 +81,57 @@ function LandingPage() {
             {/* contact section */}
             <Box sx={{ minHeight: '90vh' }}>
                 <Container>
-                    <Typography variant="h5" color="secondary">Contact Section</Typography>
+                    <Typography variant="h6" color="White" sx={{ textAlign: 'center', mb: 5 }}>Contact Us</Typography>
+
+                    <Box sx={{ height: '70vh' }}>
+                        {/* <Stack direction="row" alignItems="center" justifyContent="space-between"> */}
+                        <Grid container spacing={4}>
+                            {/* Contact page section 1 */}
+                            <Grid item xs={12} md={6} lg={3}>
+                                <Box  sx={{fontColor: 'White'}}>
+                                    section1
+                                </Box>
+                            </Grid>
+
+
+                            {/* Contact page section 2 */}
+                            <Grid item xs={12} md={6} lg={3}>
+                                <Box sx={{fontColor: 'White'}}>
+                                    section 2
+                                </Box>
+                            </Grid>
+
+                              {/* Contact page section 3 */}
+                              <Grid item xs={12} md={6} lg={3}>
+                                <Box sx={{fontColor: 'White'}}>
+                                    section 3
+                                </Box>
+                            </Grid>
+
+                            {/* contact form section grid */}
+                            <Grid item xs={12} md={6} lg={3}>
+                                <Box component="form">
+                                    <FormControl variant="standard">
+                                        <TextField
+                                            id="input-with-icon-textfield"
+                                            variant='outlined'
+                                            label="TextField"
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <AccountCircle />
+                                                    </InputAdornment>
+                                                ),
+                                            }}
+                                        />
+                                    </FormControl>
+                                </Box>
+                            </Grid>
+                        </Grid>
+
+
+                        {/* </Stack> */}
+                    </Box>
                 </Container>
             </Box>
         </Box >

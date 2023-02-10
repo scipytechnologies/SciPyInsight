@@ -57,22 +57,22 @@ export default function SignIn() {
         toast.success(`Logged In Succesfully`, {
           position: toast.POSITION.TOP_CENTER,
         });
-        console.log(response);       
-         window.location.reload(false);
-         dispatch(loginRole(role))
+        console.log(response);
+        window.location.reload(false);
+        dispatch(loginRole(role))
         setTimeout(() => {
           // navigate("/student/home");
-          
+
           dispatch(unSetLoading())
         }, 3000);
-       
-      
+
+
       })
       .catch((err) => setErrors(err.response.data));
-      setTimeout(() => {
-        dispatch(unSetLoading())
+    setTimeout(() => {
+      dispatch(unSetLoading())
 
-      }, 3000);
+    }, 3000);
 
   }
 
@@ -105,7 +105,6 @@ export default function SignIn() {
 
 
   return (
-
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
@@ -148,7 +147,7 @@ export default function SignIn() {
             onChange={onChangeHandler}
           />
 
-      
+
           <Button
             type="submit"
             fullWidth
@@ -157,6 +156,7 @@ export default function SignIn() {
           >
             Login
           </Button>
+
           <Grid container>
             <Grid item>
               <Link href="#" variant="body2">
