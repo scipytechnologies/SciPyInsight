@@ -27,15 +27,13 @@ function CourseRegister() {
             [event.target.name]: event.target.value,
         });
     };
-
+setForm({
+                userID :id,
+            })
     const onSubmitHandler = (event) => 
         {
             event.preventDefault();
-            setForm({
-                userID :id,
-                
-
-            })
+            
             axios
               .post("http://localhost:5000/user/regcourse", form)
               .then((response) => {
