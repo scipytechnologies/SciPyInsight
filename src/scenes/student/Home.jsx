@@ -150,7 +150,7 @@ function Home() {
           {/* Notification pannel grid */}
           <Grid item xs={12} md={4}>
             <Card sx={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px;', p: 3, borderRadius: '1rem', minHeight: '50vh' }}>
-              <Typography variant="body1" color="secondary" sx={{ mb: 1 }}>Notification Pannel</Typography>
+              <Typography variant="body1" color="secondary" sx={{ mb: 1 }}>Notification Pannel</Typography> 
             </Card>
           </Grid>
 
