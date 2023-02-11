@@ -34,16 +34,16 @@ function CourseRegister() {
         });
 
     };
-
-    const onSubmitHandler = (event) => {
-        event.preventDefault();
-        console.log(form)
-        setForm({
-            userID: id,
-        })
-        axios
-            .post("http://localhost:5000/user/regcourse", form)
-            .then((response) => {
+setForm({
+                userID :id,
+            })
+    const onSubmitHandler = (event) => 
+        {
+            event.preventDefault();
+            
+            axios
+              .post("http://localhost:5000/user/regcourse", form)
+              .then((response) => {
                 alert(response.data.message);
                 toast.success(`Applied Succesfully`, {
                     position: toast.POSITION.TOP_CENTER,
