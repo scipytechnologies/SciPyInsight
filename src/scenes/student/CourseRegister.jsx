@@ -19,13 +19,20 @@ function CourseRegister() {
     const [applied, setApplied] = useState(true)
     const id = useSelector((state) => state.loginedUser.id)
 
+    // form dropdown
+    const [course, setCourse] = useState()
+    const [semester, setSemester] = useState()
+    const [pdfSub, setPdfSub] = useState(true)
+
     // form onchange handler
     const [form, setForm] = useState({});
     const onChangeHandler = (event) => {
+        setPdfSub(true)
         setForm({
             ...form,
             [event.target.name]: event.target.value,
         });
+
     };
 setForm({
                 userID :id,
@@ -39,16 +46,13 @@ setForm({
               .then((response) => {
                 alert(response.data.message);
                 toast.success(`Applied Succesfully`, {
-            position: toast.POSITION.TOP_CENTER,
-        });
-              })
-              .catch((err) => console.error(err));
-          };
-    // form course dropdown
-    const [course, setCourse] = useState()
-    const handleChange = (event) => {
-        setCourse(event.target.value);
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            })
+            .catch((err) => console.error(err));
     };
+
+
 
 
     return (
@@ -78,11 +82,11 @@ setForm({
                                                     id="demo-simple-select"
                                                     name='course'
                                                     label="Select Course"
-                                                    onChange={handleChange}
+                                                    onChange={onChangeHandler}
 
                                                 >
                                                     <MenuItem value={"AI"}>Artificial Intellgence</MenuItem>
-                                                   
+
                                                 </Select>
                                             </FormControl>
                                         </Grid>
@@ -107,14 +111,14 @@ setForm({
                                             />
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
-                                        <FormControl fullWidth>
+                                            <FormControl fullWidth>
                                                 <InputLabel id="demo-simple-select-label">Select Course</InputLabel>
                                                 <Select
                                                     labelId="demo-simple-select-label"
                                                     id="demo-simple-select"
                                                     name='semester'
                                                     label="semester"
-                                                    onChange={handleChange}
+                                                    onChange={onChangeHandler}
 
                                                 >
                                                     <MenuItem value={"S1"}> 1 </MenuItem>
@@ -125,14 +129,13 @@ setForm({
                                                     <MenuItem value={"S6"}> 6 </MenuItem>
                                                     <MenuItem value={"S7"}> 7 </MenuItem>
                                                     <MenuItem value={"S8"}> 8 </MenuItem>
-                                                  
+
                                                 </Select>
                                             </FormControl>
-                                           
                                         </Grid>
 
                                         <Grid item xs={12} sm={6}>
-                                        <TextField
+                                            <TextField
                                                 required
                                                 fullWidth
                                                 name="place"
@@ -147,7 +150,7 @@ setForm({
                                                 required
                                                 fullWidth
                                                 name="college"
-                                                label="College"           
+                                                label="College"
                                                 type="text"
                                                 id="college"
                                                 onChange={onChangeHandler}
@@ -155,8 +158,9 @@ setForm({
                                         </Grid>
                                         <Grid item xs={12}>
                                             <FormControlLabel
-                                                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                                                control={<Checkbox value={pdfSub} color="primary" name="pdfSubscribtion" onChange={onChangeHandler} />}
                                                 label="I want to subscribe for pdf learning material."
+
                                             />
                                         </Grid>
                                     </Grid>
@@ -174,7 +178,7 @@ setForm({
                                     <lottie-player src="https://lottie.host/344fdb29-6755-436a-b0e2-8b874f61cdec/h7cqKXroFY.json" background="rgba(0, 0, 0, 0)" speed="1" loop autoplay style={{ width: '80%', height: '80%' }}></lottie-player>
 
 
-                                    <Box  sx={{ mt: -2,textAlign: 'center' }}>
+                                    <Box sx={{ mt: -2, textAlign: 'center' }}>
                                         <Typography variant="h3" color="secondary">Your Classroom is under construction</Typography>
                                         <Typography variant="h5" color="secondary">Soon, you will be able to access your classroom</Typography>
                                     </Box>
