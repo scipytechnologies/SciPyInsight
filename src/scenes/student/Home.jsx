@@ -28,7 +28,7 @@ function Home() {
         // handle success
         console.log(response.data.courseReg);
         dispatch(courseReg(response.data.courseReg))
-        if (response.data.courseReg == "false") {
+        if (response.data.courseReg !== "true" ) {
           navigate("/student/courseRegister");
         }
 

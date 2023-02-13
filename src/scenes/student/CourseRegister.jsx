@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Box, Breadcrumbs, Card, Checkbox, Container, FormControlLabel, Grid, TextField, Typography, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material'
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+
 import Loader from '../../scenes/main/Loader'
 import { toast } from 'react-toastify'
 import axios from 'axios';
@@ -9,48 +9,63 @@ import { useSelector } from 'react-redux';
 
 function CourseRegister() {
 
+    const id = useSelector((state) => state.loginedUser.id)
+    const active = useSelector((state) => state.loginedUser.courseReg)
+    console.log(active)
 
 
+    const [form, setForm] = useState({ userID: id, course: '', semester: '' });
     const breadcrumbs = [
         { label: 'Home', to: '/student/home' },
         { label: 'Course Register', to: '/student/class' }
     ];
 
     const [applied, setApplied] = useState(true)
-    const id = useSelector((state) => state.loginedUser.id)
+
 
     // form dropdown
-    const [course, setCourse] = useState()
-    const [semester, setSemester] = useState()
+    const [course, setCourse] = useState('')
+    const [semester, setSemester] = useState('')
     const [pdfSub, setPdfSub] = useState(true)
 
     // form onchange handler
-    const [form, setForm] = useState({});
+
     const onChangeHandler = (event) => {
-        setPdfSub(true)
+        // setPdfSub(true)
         setForm({
             ...form,
             [event.target.name]: event.target.value,
         });
+        console.log(form)
 
     };
-setForm({
-                userID :id,
-            })
-    const onSubmitHandler = (event) => 
-        {
-            event.preventDefault();
-            
-            axios
-              .post("http://localhost:5000/user/regcourse", form)
-              .then((response) => {
-                alert(response.data.message);
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
+        axios
+            .post("http://localhost:5000/user/regcourse", form)
+            .then((response) => {
+                alert(response.data);
                 toast.success(`Applied Succesfully`, {
                     position: toast.POSITION.TOP_CENTER,
                 });
+
+                const update = {
+                    courseReg: "pending"
+                }
+                axios.put(`http://localhost:5000/user/updatecourseReg/${id}`, update)
+                    .then((response) => {
+                        console.log(response)
+                    })
+                    .catch((err) => console.error(err));
+
             })
             .catch((err) => console.error(err));
     };
+    useEffect(() => {
+        if (active == "pending") {
+            setApplied(false)
+        }
+    }, []);
 
 
 
@@ -81,6 +96,7 @@ setForm({
                                                     labelId="demo-simple-select-label"
                                                     id="demo-simple-select"
                                                     name='course'
+                                                    value={form.course}
                                                     label="Select Course"
                                                     onChange={onChangeHandler}
 
@@ -117,6 +133,7 @@ setForm({
                                                     labelId="demo-simple-select-label"
                                                     id="demo-simple-select"
                                                     name='semester'
+                                                    value={form.semester}
                                                     label="semester"
                                                     onChange={onChangeHandler}
 
@@ -158,7 +175,7 @@ setForm({
                                         </Grid>
                                         <Grid item xs={12}>
                                             <FormControlLabel
-                                                control={<Checkbox value={pdfSub} color="primary" name="pdfSubscribtion" onChange={onChangeHandler} />}
+                                                control={<Checkbox value={pdfSub} color="primary" name="premium" onChange={onChangeHandler} />}
                                                 label="I want to subscribe for pdf learning material."
 
                                             />

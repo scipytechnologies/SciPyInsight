@@ -11,6 +11,7 @@ router.post("/signin", UserController.signin);
 router.post('/auth', UserController.verifyToken)
 router.get(`/getuser/:id`,UserController.getUser)
 router.post('/regcourse',CourseController.addCourseReg )
+router.put('/updateCourseReg/:id',CourseController.updateCourseReg )
 // POST request to handle the Google Login response.
 router.post("/google-login", UserController.googleLogin);
 

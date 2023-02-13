@@ -1,4 +1,6 @@
 const CourseReg = require("../models/courseReg");
+const User = require("../models/user");
+
 
 module.exports = {
 
@@ -30,7 +32,18 @@ module.exports = {
     } catch (error) {
       console.log(error.message);
     }
-  }
+  },
 
+ updateCourseReg : async (req, res) => {
+    try {
+         await User.findByIdAndUpdate(req.params.id, {
+            courseReg : req.body.courseReg
+        });
+
+    } catch(err) {
+        console.error(err.message);
+        res.send(500).send('Server Error');
+    }
+}
 
 } 
