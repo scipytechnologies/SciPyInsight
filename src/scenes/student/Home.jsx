@@ -12,6 +12,12 @@ import LineChart from './LineChart';
 import BarChart from './BarChart';
 import { attendence, Data } from './chartData'
 import styled from '@emotion/styled';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
@@ -108,6 +114,44 @@ function Home() {
           </Grid>
 
 
+          {/* Notification pannel grid */}
+          <Grid item xs={12} md={4}>
+            <Card sx={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px;', p: 3, borderRadius: '1rem', minHeight: '50vh' }}>
+              <Typography variant="body1" color="secondary" sx={{ mb: 1 }}>Notification Pannel</Typography>
+
+
+              <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                <ListItem alignItems="flex-start">
+                  <ListItemText
+                    primary="Brunch this weekend?"
+                    secondary={
+                      "I'll be in your neighborhood doing errands this…"
+                    }
+                  />
+                </ListItem>
+                <Divider component="li" />
+                <ListItem alignItems="flex-start">
+                  <ListItemText
+                    primary="Summer BBQ"
+                    secondary={
+                      "Wish I could come, but I'm out of town this…"
+                    }
+                  />
+                </ListItem>
+                <Divider component="li" />
+                <ListItem alignItems="flex-start">
+                  <ListItemText
+                    primary="Oui Oui"
+                    secondary={
+                      "Do you have Paris recommendations? Have you ever…"
+                    }
+                  />
+                </ListItem>
+              </List>
+            </Card>
+          </Grid>
+
+
           <Grid item xs={12} md={4}>
 
             <Card sx={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px;', p: 3, borderRadius: '1rem', mt: 1, minHeight: '35vh' }}>
@@ -147,12 +191,7 @@ function Home() {
             </Card>
           </Grid>
 
-          {/* Notification pannel grid */}
-          <Grid item xs={12} md={4}>
-            <Card sx={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px;', p: 3, borderRadius: '1rem', minHeight: '50vh' }}>
-              <Typography variant="body1" color="secondary" sx={{ mb: 1 }}>Notification Pannel</Typography> 
-            </Card>
-          </Grid>
+
 
         </Grid>
       </Container>
