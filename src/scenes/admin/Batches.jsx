@@ -96,7 +96,7 @@ function Batches() {
           navigate('sfd')
         };
 
-        return <Button variant='outlined' onClick={onClick} size="small" >More</Button>;
+        return <Button variant='outlined' onClick={onClick} size="small" >Mor</Button>;
       },
     },
   ];
