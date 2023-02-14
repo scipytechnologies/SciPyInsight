@@ -99,11 +99,13 @@ function App() {
               {/* admin */}
               <Route path="admin" element={<ProtectedRoute user={active}><Dashboard /></ProtectedRoute>}>
                 <Route path='home' element={<ProtectedRoute user={active}><Home /></ProtectedRoute>} />
-                <Route path='batches' element={<ProtectedRoute user={active}><Batches /></ProtectedRoute>} >
-                  <Route path=':batchId' element={<ProtectedRoute user={active}><Batches /></ProtectedRoute>} />
+                <Route path='batches' >
+                  <Route index element={<ProtectedRoute user={active}><Batches /></ProtectedRoute>} />
+                  <Route path=':batchId'element={<ProtectedRoute user={active}><Batch /></ProtectedRoute>} />
                 </Route>
 
-                <Route path='students' element={<ProtectedRoute user={active}><Students /></ProtectedRoute>} >
+                <Route path='students' >
+                  <Route index element={<ProtectedRoute user={active}><Students /></ProtectedRoute>} />
                   <Route path=':studentId' element={<ProtectedRoute user={active}><Student /></ProtectedRoute>} />
                 </Route>
 

@@ -190,9 +190,6 @@ function Home() {
               </Box>
             </Card>
           </Grid>
-
-
-
         </Grid>
       </Container>
     </>
