@@ -59,10 +59,8 @@ export default function SignIn() {
         });
         console.log(response);
         window.location.reload(false);
-        dispatch(loginRole(role))
+        // dispatch(loginRole(role))
         setTimeout(() => {
-          // navigate("/student/home");
-
           dispatch(unSetLoading())
         }, 3000);
 

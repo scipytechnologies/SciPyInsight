@@ -4,17 +4,18 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const ForceRedirect = ({ user, children }) => {
   const active = useSelector((state) => state.loginedUser.role)
+  console.log(user)
   console.log(active);
-  if (user) {
+  if (user == true) {
     switch(active) {
       case 'student': 
       return <Navigate to="/student/home" replace />;
-      case 'admin' : 
+      case 'admin': 
       return <Navigate to="/admin/home" replace />;
       case 'teacher' :
       return <Navigate to="/teacher/home" replace />;
       case '' :
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/" replace />;
     }
     
   }
