@@ -5,13 +5,17 @@ import { Link } from 'react-router-dom';
 import Loader from '../../scenes/main/Loader'
 import { toast } from 'react-toastify'
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import { courseReg } from '../../store/loginedUserSlice';
 
 function CourseRegister() {
 
     const id = useSelector((state) => state.loginedUser.id)
     const active = useSelector((state) => state.loginedUser.courseReg)
     console.log(active)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
 
     const [form, setForm] = useState({ userID: id, course: '', semester: '' });
@@ -60,11 +64,23 @@ function CourseRegister() {
 
             })
             .catch((err) => console.error(err));
+            dispatch(courseReg("pending"))
+            checkCourseReg()
+            window.location.reload(false);
+            
+            
+
     };
-    useEffect(() => {
+
+    const checkCourseReg = () => {
         if (active == "pending") {
             setApplied(false)
         }
+    }
+
+
+    useEffect(() => {
+        checkCourseReg()
     }, []);
 
 
