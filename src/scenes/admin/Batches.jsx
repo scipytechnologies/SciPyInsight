@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
@@ -12,7 +12,9 @@ import Modal from '@mui/material/Modal';
 import { useNavigate } from 'react-router-dom';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Select from '@mui/material/Select'
+import axios from 'axios';
+import { toast } from 'react-toastify'
 
 
 function Batches() {
@@ -49,21 +51,30 @@ function Batches() {
     setOpen(false);
   };
 
-  const [teacher, setTeacher] = React.useState('');
-
+  const [form, setForm] = useState({teacher:''});
   const handleChange = (event) => {
-    setTeacher(event.target.value);
-  };
+  
+    setForm({
+        ...form,
+        [event.target.name]: event.target.value,
+    });
+    console.log(form)
+
+};
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
+    axios
+        .post("http://localhost:5000/admin/addbatch", form)
+        .then((response) => {
+            alert(response.data);
+            toast.success(`Batch Created`, {
+                position: toast.POSITION.TOP_CENTER,
+            });          
+          
+        })
+        .catch((err) => console.error(err));
+};
 
   // mock data
   const columns = [
@@ -168,11 +179,11 @@ function Batches() {
               Batch Details
             </Typography>
 
-            <Button variant='contained' color='primary'>Save</Button>
+            <Button variant='contained' color='primary' onClick={handleSubmit} >Save</Button>
           </Stack>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate  sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} >
                 <TextField
                   autoComplete="given-name"
                   name="batchName"
@@ -183,9 +194,10 @@ function Batches() {
                   autoFocus
                   size='small'
                   sx={placeholderStyle}
+                  onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -195,16 +207,17 @@ function Batches() {
                   size='small'
                   sx={placeholderStyle}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
                   id="courseName"
                   label="Course Name"
-                  name="courseName"
+                  name="course"
                   size='small'
                   sx={placeholderStyle}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -216,6 +229,7 @@ function Batches() {
                   id="duration"
                   size='small'
                   sx={placeholderStyle}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -224,9 +238,11 @@ function Batches() {
                   <Select
                     labelId="demo-select-small"
                     id="demo-select-small"
-                    value={teacher}
+                    value={form.teacher}
                     label="Assign Teacher"
+                    name='teacher'
                     onChange={handleChange}
+
                   >
                     <MenuItem value="John Doe">John Doe</MenuItem>
                     <MenuItem value="David">David</MenuItem>

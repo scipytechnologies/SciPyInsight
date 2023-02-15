@@ -7,7 +7,7 @@ const BatchSchema = new Schema(
       type: String,
       required: true,
     },
-    Course: {
+    course: {
         type: String,
         required: true,
       },
@@ -19,7 +19,7 @@ const BatchSchema = new Schema(
         type: String,
         required: true,
       },
-
+ 
     }
     
 );

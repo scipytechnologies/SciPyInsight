@@ -36,6 +36,7 @@ function Home() {
         dispatch(courseReg(response.data.courseReg))
         if (response.data.courseReg !== "true" ) {
           navigate("/student/courseRegister");
+          console.log("irangi poda")
         }
 
       })

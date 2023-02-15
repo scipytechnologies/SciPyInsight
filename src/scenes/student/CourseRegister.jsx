@@ -34,6 +34,13 @@ function CourseRegister() {
 
     // form onchange handler
 
+    const checkCourseReg = () => {
+        if (active == "pending") {
+            setApplied(false)
+        }
+    }
+
+
     const onChangeHandler = (event) => {
         // setPdfSub(true)
         setForm({
@@ -48,36 +55,36 @@ function CourseRegister() {
         axios
             .post("http://localhost:5000/user/regcourse", form)
             .then((response) => {
-                alert(response.data);
-                toast.success(`Applied Succesfully`, {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-
                 const update = {
                     courseReg: "pending"
                 }
-                axios.put(`http://localhost:5000/user/updatecourseReg/${id}`, update)
+               axios.put(`http://localhost:5000/user/updatecourseReg/${id}`, update)
                     .then((response) => {
-                        console.log(response)
+                        console.log(response)         
+                           dispatch(courseReg("pending")) 
+                           checkCourseReg() 
+                           
                     })
                     .catch((err) => console.error(err));
-
+                toast.success(`Applied Succesfully`, {
+                    position: toast.POSITION.TOP_CENTER,
+                });  
+           
             })
             .catch((err) => console.error(err));
-            dispatch(courseReg("pending"))
-            checkCourseReg()
-            window.location.reload(false);
+           
+           
             
-            
+            let delayInMilliseconds = 3000; //1 second
+
+setTimeout(function() {
+  //your code to be executed after 1 second
+  window.location.reload(false);
+}, delayInMilliseconds);
 
     };
 
-    const checkCourseReg = () => {
-        if (active == "pending") {
-            setApplied(false)
-        }
-    }
-
+    
 
     useEffect(() => {
         checkCourseReg()

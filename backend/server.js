@@ -18,7 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../client/public"));
 app.use(cookieParser())
-
+const userRoutes = require("./routes/users");
+const adminRoutes = require("./routes/admin");
 app.use(
   cors({
     origin: ["http://localhost:3000"],
@@ -26,10 +27,11 @@ app.use(
   })
 );
 //Require application Route modules
-const userRoutes = require("./routes/users");
+
 
 
 app.use("/user", userRoutes);
+app.use("/admin",adminRoutes)
 // app.use("/user", orgRoutes)
 
 app.listen(PORT, function () {
